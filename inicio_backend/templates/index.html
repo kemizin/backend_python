@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Meu Backend</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <form action="/login_web" method="post">
+        <input type="text" name="user" placeholder="Usuário" required>
+        <input type="password" name="senha" placeholder="Senha" required>
+        <button type="submit">Login</button>
+    </form>
+
+    <h1>Criar Usuário</h1>
+    <form action="/create_user_web" method="post">
+        <input type="text" name="user" placeholder="Novo usuário" required>
+        <input type="password" name="senha" placeholder="Senha" required>
+        <button type="submit">Criar</button>
+    </form>
+
+    <h1>Usuários</h1>
+    <ul>
+        {% for u in usuarios %}
+            <li>{{ u.user }}
+                <form action="/delete_user_web" method="post" style="display:inline">
+                    <input type="hidden" name="user" value="{{ u.user }}">
+                    <input type="password" name="senha" placeholder="Senha para deletar" required>
+                    <button type="submit">Deletar</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
