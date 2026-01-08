@@ -1,6 +1,8 @@
 import sqlite3
 from typing import Optional, List, Dict
-from security import verify_password
+
+from .security import verify_password
+
 
 DB_NAME = "meu_banco.db"
 

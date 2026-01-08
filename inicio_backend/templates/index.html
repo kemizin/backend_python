@@ -21,7 +21,9 @@
     <h1>Usuários</h1>
     <ul>
         {% for u in usuarios %}
-            <li>{{ u.user }}
+            <li>
+                {{ u.user }}
+
                 <form action="/delete_user_web" method="post" style="display:inline">
                     <input type="hidden" name="user" value="{{ u.user }}">
                     <input type="password" name="senha" placeholder="Senha para deletar" required>
@@ -30,5 +32,11 @@
             </li>
         {% endfor %}
     </ul>
+
+    <hr>
+
+    <form action="/leyley" method="get" target="_blank">
+        <button type="submit">ley ley</button>
+    </form>
 </body>
 </html>

@@ -1,9 +1,15 @@
 from fastapi import APIRouter, HTTPException, status
-from schemas import LoginRequest, UserCreate, UserResponse
-from database import get_user, create_user, list_users, update_user, delete_user
-from security import hash_password, verify_password
-from schemas import LoginRequest
-from main import * 
+
+from ..schemas import LoginRequest, UserCreate, UserResponse
+from ..database import (
+    get_user,
+    create_user,
+    list_users,
+    update_user,
+    delete_user
+)
+from ..security import hash_password, verify_password
+
 
 router = APIRouter()
 
