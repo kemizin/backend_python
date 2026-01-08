@@ -21,6 +21,41 @@ def index(request: Request):
         {"request": request, "usuarios": usuarios}
     )
 
+@app.post("/login_web")
+def login_web(
+    user: str = Form(...),
+    senha: str = Form(...)
+):
+    from .database import get_user
+    from .security import verify_password
+
+    usuario = get_user(user)
+    if not usuario or not verify_password(senha, usuario["senha"]):
+        return RedirectResponse("/", status_code=303)
+
+    return RedirectResponse("/", status_code=303)
+
+@app.post("/create_user_web")
+def create_user_web(
+    user: str = Form(...),
+    senha: str = Form(...)
+):
+    from .database import create_user
+    from .security import hash_password
+
+    create_user(user, hash_password(senha))
+    return RedirectResponse("/", status_code=303)
+
+@app.post("/delete_user_web")
+def delete_user_web(
+    user: str = Form(...),
+    senha: str = Form(...)
+):
+    from .database import delete_user
+
+    delete_user(user, senha)
+    return RedirectResponse("/", status_code=303)
+
 
 @app.get("/leyley")
 def leyley():
