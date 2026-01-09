@@ -1,11 +1,22 @@
 from fastapi import FastAPI, Request, Form
 from fastapi.responses import HTMLResponse, FileResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
+from fastapi import HTTPException
+from fastapi.responses import JSONResponse
+import logging
 
 from .routes.users import router as users_router
 from .database import list_users
 
 app = FastAPI()
+
+@app.exception_handler(HTTPException)
+async def custom_http_exception_handler(request: Request, exc: HTTPException):
+    logging.error(f"HTTPException: {exc.status_code} {exc.detail}")
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={"message": exc.detail},
+    )
 
 # inclui TODAS as rotas da pasta routes
 app.include_router(users_router)
